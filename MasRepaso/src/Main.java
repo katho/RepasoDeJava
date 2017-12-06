@@ -1,6 +1,8 @@
+import java.util.Scanner;
 
 public class Main {
 
+	static int movimientos = 0;
 	public static void main(String[] args) {
 		// Primitivas vs Wrappers
 
@@ -31,62 +33,67 @@ public class Main {
 
 		// int[] array = {10, 15, 22, 14,8, 7, 4, 1, 20, 900, 800};
 		// burbuja(array);
-		/*Thread hilo = new Thread(new Runnable() {
+		/*
+		 * Thread hilo = new Thread(new Runnable() {
+		 * 
+		 * @Override public void run() { // TODO Auto-generated method stub int[] array
+		 * = { 10, 15, 22, 14, 8, 7, 4, 1, 20, 900, 800 }; int comparaciones = 0; int
+		 * aux = 0; int intercambios = 0; for (int x = 0; x < array.length; x++) {
+		 * System.out.print(array[x] + " "); } System.out.println(); for (int z = 1; z <
+		 * array.length; ++z) { for (int v = 0; v < (array.length - z); ++v) {
+		 * comparaciones++; if (array[v] > array[v + 1]) { aux = array[v]; array[v] =
+		 * array[v + 1]; array[v + 1] = aux; intercambios++; } } try {
+		 * Thread.sleep(3000); for (int x = 0; x < array.length; x++) {
+		 * System.out.print(array[x] + " "); } System.out.println(); } catch
+		 * (InterruptedException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); }
+		 * 
+		 * } System.out.println("\nComparaciones: " + comparaciones + "\nIntercambios: "
+		 * + intercambios); }
+		 * 
+		 * });
+		 * 
+		 * hilo.start();
+		 */
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				int[] array = { 10, 15, 22, 14, 8, 7, 4, 1, 20, 900, 800 };
-				int comparaciones = 0;
-				int aux = 0;
-				int intercambios = 0;
-				for (int x = 0; x < array.length; x++) {
-					System.out.print(array[x] + " ");
-				}
-				System.out.println();
-				for (int z = 1; z < array.length; ++z) {
-					for (int v = 0; v < (array.length - z); ++v) {
-						comparaciones++;
-						if (array[v] > array[v + 1]) {
-							aux = array[v];
-							array[v] = array[v + 1];
-							array[v + 1] = aux;
-							intercambios++;
-						}
-					}
-					try {
-						Thread.sleep(3000);
-						for (int x = 0; x < array.length; x++) {
-							System.out.print(array[x] + " ");
-						}
-						System.out.println();
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-				}
-				System.out.println("\nComparaciones: " + comparaciones + "\nIntercambios: " + intercambios);
-			}
-
-		});
-
-		hilo.start();*/
-		
-		int[] array = {10, 15, 22, 14,8, 7, 4, 1, 20, 9, 11};
-		for (int x = 0; x < array.length; x++) 
-	    {
+		/*int[] array = { 10, 15, 22, 14, 8, 7, 4, 1, 20, 9, 11 };
+		for (int x = 0; x < array.length; x++) {
 			System.out.print(array[x] + " ");
-	    }
-	    System.out.println("\n");
-		//cocktailSort(array);
-		//insertSort(array);
-		//int maxVal = 22;
-		//bucketSort(array,maxVal);
+		}
+		System.out.println("\n");
+		// cocktailSort(array);
+		// insertSort(array);
+		// int maxVal = 22;
+		// bucketSort(array,maxVal);
 		shellSort(array);
+		doTowers(7, 'A', 'B', 'C');*/
+		Scanner entrada = new Scanner(System.in);
+		System.out.println("Digite o número de discos: ");
+		int n = entrada.nextInt();
 
+		// 
+		HanoiIterativo.hanoi(n);
 	}
-	
+
+	public static void doTowers(int topN, char from, char inter, char to) {
+		
+		if (topN == 1) {
+			System.out.println("Disk 1 from " + from + " to " + to);
+			movimientos++;
+		} else {
+			doTowers(topN - 1, from, to, inter);
+			System.out.println("Disco " + topN + " desde " + from + " hacia " + to);
+			movimientos++;
+			// llamada recursiva
+			
+			
+			doTowers(topN - 1, inter, from, to);
+			
+		}
+		
+		System.out.println("\nMovimientos: "+movimientos);
+	}
+
 	public static void shellSort(int[] array) {
 		int increment = array.length / 2;
 		while (increment > 0) {
@@ -105,67 +112,61 @@ public class Main {
 				increment *= (5.0 / 11);
 			}
 		}
-		for (int x = 0; x < array.length; x++) 
-	    {
-			System.out.print(array[x] + " ");
-	    }
-	    System.out.println("\n");
-	}
-	
-	 public static void bucketSort(int[] array, int maxVal) {
-	      int [] bucket=new int[maxVal+1];
-	 
-	      for (int i=0; i<bucket.length; i++) {
-	         bucket[i]=0;
-	      }
-	 
-	      for (int i=0; i<array.length; i++) {
-	         bucket[array[i]]++;
-	      }
-	 
-	      int outPos=0;
-	      for (int i=0; i<bucket.length; i++) {
-	         for (int j=0; j<bucket[i]; j++) {
-	            array[outPos++]=i;
-	            
-	         }
-	      }
-	      for (int x = 0; x < array.length; x++) 
-	      {
-	    	  System.out.print(array[x] + " ");
-	      }
-	      System.out.println("\n");
-	   }
-	
-	public static void insertSort(int[] array)
-	{
-		for (int x = 0; x < array.length; x++) 
-		{
+		for (int x = 0; x < array.length; x++) {
 			System.out.print(array[x] + " ");
 		}
 		System.out.println("\n");
-		
+	}
+
+	public static void bucketSort(int[] array, int maxVal) {
+		int[] bucket = new int[maxVal + 1];
+
+		for (int i = 0; i < bucket.length; i++) {
+			bucket[i] = 0;
+		}
+
+		for (int i = 0; i < array.length; i++) {
+			bucket[array[i]]++;
+		}
+
+		int outPos = 0;
+		for (int i = 0; i < bucket.length; i++) {
+			for (int j = 0; j < bucket[i]; j++) {
+				array[outPos++] = i;
+
+			}
+		}
+		for (int x = 0; x < array.length; x++) {
+			System.out.print(array[x] + " ");
+		}
+		System.out.println("\n");
+	}
+
+	public static void insertSort(int[] array) {
+		for (int x = 0; x < array.length; x++) {
+			System.out.print(array[x] + " ");
+		}
+		System.out.println("\n");
+
 		int temp;
-        for (int i = 1; i < array.length; i++) {
-            for(int j = i ; j > 0 ; j--){
-                if(array[j] < array[j-1]){
-                    temp = array[j];
-                    array[j] = array[j-1];
-                    array[j-1] = temp;
-                }
-            }
-            for (int x = 0; x < array.length; x++) 
-    		{
-    			System.out.print(array[x] + " ");
-    		}
-    		System.out.println();
-        }
+		for (int i = 1; i < array.length; i++) {
+			for (int j = i; j > 0; j--) {
+				if (array[j] < array[j - 1]) {
+					temp = array[j];
+					array[j] = array[j - 1];
+					array[j - 1] = temp;
+				}
+			}
+			for (int x = 0; x < array.length; x++) {
+				System.out.print(array[x] + " ");
+			}
+			System.out.println();
+		}
 	}
 
 	public static void cocktailSort(int[] array) {
 		boolean swapped;
-		for (int x = 0; x < array.length; x++) 
-		{
+		for (int x = 0; x < array.length; x++) {
 			System.out.print(array[x] + " ");
 		}
 		System.out.println();
@@ -180,8 +181,7 @@ public class Main {
 					swapped = true;
 				}
 			}
-			for (int x = 0; x < array.length; x++) 
-			{
+			for (int x = 0; x < array.length; x++) {
 				System.out.print(array[x] + " ");
 			}
 			System.out.println();
@@ -198,16 +198,14 @@ public class Main {
 					swapped = true;
 				}
 			}
-			for (int x = 0; x < array.length; x++) 
-			{
+			for (int x = 0; x < array.length; x++) {
 				System.out.print(array[x] + " ");
 			}
 			System.out.println();
 			// if no elements have been swapped, then the list is sorted
 		} while (swapped);
-		
-		for (int x = 0; x < array.length; x++) 
-		{
+
+		for (int x = 0; x < array.length; x++) {
 			System.out.print(array[x] + " ");
 		}
 		System.out.println();
