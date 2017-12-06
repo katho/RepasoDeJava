@@ -74,8 +74,34 @@ public class Main {
 		hilo.start();*/
 		
 		int[] array = {10, 15, 22, 14,8, 7, 4, 1, 20, 900, 800};
-		cocktailSort(array);
+		//cocktailSort(array);
+		insertSort(array);
 
+	}
+	
+	public static void insertSort(int[] array)
+	{
+		for (int x = 0; x < array.length; x++) 
+		{
+			System.out.print(array[x] + " ");
+		}
+		System.out.println("\n");
+		
+		int temp;
+        for (int i = 1; i < array.length; i++) {
+            for(int j = i ; j > 0 ; j--){
+                if(array[j] < array[j-1]){
+                    temp = array[j];
+                    array[j] = array[j-1];
+                    array[j-1] = temp;
+                }
+            }
+            for (int x = 0; x < array.length; x++) 
+    		{
+    			System.out.print(array[x] + " ");
+    		}
+    		System.out.println();
+        }
 	}
 
 	public static void cocktailSort(int[] array) {
