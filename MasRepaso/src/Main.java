@@ -74,11 +74,42 @@ public class Main {
 		hilo.start();*/
 		
 		int[] array = {10, 15, 22, 14,8, 7, 4, 1, 20, 9, 11};
+		for (int x = 0; x < array.length; x++) 
+	    {
+			System.out.print(array[x] + " ");
+	    }
+	    System.out.println("\n");
 		//cocktailSort(array);
 		//insertSort(array);
-		int maxVal = 22;
-		bucketSort(array,maxVal);
+		//int maxVal = 22;
+		//bucketSort(array,maxVal);
+		shellSort(array);
 
+	}
+	
+	public static void shellSort(int[] array) {
+		int increment = array.length / 2;
+		while (increment > 0) {
+			for (int i = increment; i < array.length; i++) {
+				int j = i;
+				int temp = array[i];
+				while (j >= increment && array[j - increment] > temp) {
+					array[j] = array[j - increment];
+					j = j - increment;
+				}
+				array[j] = temp;
+			}
+			if (increment == 2) {
+				increment = 1;
+			} else {
+				increment *= (5.0 / 11);
+			}
+		}
+		for (int x = 0; x < array.length; x++) 
+	    {
+			System.out.print(array[x] + " ");
+	    }
+	    System.out.println("\n");
 	}
 	
 	 public static void bucketSort(int[] array, int maxVal) {
