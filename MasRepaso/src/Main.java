@@ -73,11 +73,38 @@ public class Main {
 
 		hilo.start();*/
 		
-		int[] array = {10, 15, 22, 14,8, 7, 4, 1, 20, 900, 800};
+		int[] array = {10, 15, 22, 14,8, 7, 4, 1, 20, 9, 11};
 		//cocktailSort(array);
-		insertSort(array);
+		//insertSort(array);
+		int maxVal = 22;
+		bucketSort(array,maxVal);
 
 	}
+	
+	 public static void bucketSort(int[] array, int maxVal) {
+	      int [] bucket=new int[maxVal+1];
+	 
+	      for (int i=0; i<bucket.length; i++) {
+	         bucket[i]=0;
+	      }
+	 
+	      for (int i=0; i<array.length; i++) {
+	         bucket[array[i]]++;
+	      }
+	 
+	      int outPos=0;
+	      for (int i=0; i<bucket.length; i++) {
+	         for (int j=0; j<bucket[i]; j++) {
+	            array[outPos++]=i;
+	            
+	         }
+	      }
+	      for (int x = 0; x < array.length; x++) 
+	      {
+	    	  System.out.print(array[x] + " ");
+	      }
+	      System.out.println("\n");
+	   }
 	
 	public static void insertSort(int[] array)
 	{
